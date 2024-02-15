@@ -18,17 +18,17 @@
 
     <ImageButton
         android:id="@+id/button_right"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         app:layout_constraintStart_toEndOf="@+id/button_up"
         app:layout_constraintTop_toBottomOf="@+id/button_up"
         app:srcCompat="?android:attr/listChoiceIndicatorSingle" />
 
     <ImageButton
         android:id="@+id/button_up"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="268dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="199dp"
         android:layout_marginTop="52dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/canvas"
@@ -36,16 +36,16 @@
 
     <ImageButton
         android:id="@+id/button_left"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         app:layout_constraintEnd_toStartOf="@+id/button_up"
         app:layout_constraintTop_toBottomOf="@+id/button_up"
         app:srcCompat="?android:attr/listChoiceIndicatorSingle" />
 
     <ImageButton
         android:id="@+id/button_down"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         app:layout_constraintStart_toEndOf="@+id/button_left"
         app:layout_constraintTop_toBottomOf="@+id/button_left"
         app:srcCompat="?android:attr/listChoiceIndicatorSingle" />

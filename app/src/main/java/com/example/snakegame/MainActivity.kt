@@ -20,11 +20,7 @@ class MainActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         supportActionBar?.hide()
 
-        ///////////////////////////////////////////////////////////////////////////////////////
-        // touch control
-
         open class OnSwipeTouchListener : View.OnTouchListener {
-
             private val gestureDetector = GestureDetector(GestureListener())
 
             fun onTouch(event: MotionEvent): Boolean {
@@ -32,7 +28,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
-
                 private val SWIPE_THRESHOLD = 100
                 private val SWIPE_VELOCITY_THRESHOLD = 100
 
@@ -59,7 +54,6 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }
                         } else {
-                            // this is either a bottom or top swipe.
                             if (abs(diffY) > SWIPE_THRESHOLD && abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
                                 if (diffY > 0) {
                                     onSwipeTop()
@@ -104,63 +98,54 @@ class MainActivity : AppCompatActivity() {
                 if (Snake.direction != "up")
                     Snake.direction = "down"
             }
+
             override fun onSwipeBottom() {
                 Snake.alive = true
                 if (Snake.direction != "down")
                     Snake.direction = "up"
             }
         })
-////////////////////////////////////////////////////////////////////////////////////////
 
-        // move the snake
         CoroutineScope(Dispatchers.IO).launch {
             while (true) {
                 while (Snake.alive) {
                     when (Snake.direction) {
                         "up" -> {
-                            // create new head position
                             Snake.headY -= 50
-                            if (!Snake.possibleMove()) {
+                            if (!Snake.possibleMove() || Snake.checkCollision()) {
                                 Snake.alive = false
                                 Snake.reset()
                             }
                         }
                         "down" -> {
-                            // create new head position
                             Snake.headY += 50
-                            if (!Snake.possibleMove()) {
+                            if (!Snake.possibleMove() || Snake.checkCollision()) {
                                 Snake.alive = false
                                 Snake.reset()
                             }
                         }
                         "left" -> {
-                            // create new head position
                             Snake.headX -= 50
-                            if (!Snake.possibleMove()) {
+                            if (!Snake.possibleMove() || Snake.checkCollision()) {
                                 Snake.alive = false
                                 Snake.reset()
                             }
-
                         }
                         "right" -> {
-                            // create new head position
                             Snake.headX += 50
-                            if (!Snake.possibleMove()) {
+                            if (!Snake.possibleMove() || Snake.checkCollision()) {
                                 Snake.alive = false
                                 Snake.reset()
                             }
                         }
                     }
-                    // convert head to body
                     Snake.bodyParts.add(arrayOf(Snake.headX, Snake.headY))
 
-                    // delete tail if not eat
                     if (Snake.headX == Food.posX && Snake.headY == Food.posY)
                         Food.generate()
                     else
                         Snake.bodyParts.removeAt(0)
 
-                    //game speed in millisecond
                     canvas.invalidate()
                     delay(150)
                 }
