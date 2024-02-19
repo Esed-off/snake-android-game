@@ -1,12 +1,14 @@
 package com.example.snakegame
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.ActivityInfo
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import kotlin.math.abs
@@ -142,7 +144,7 @@ class MainActivity : AppCompatActivity() {
                     Snake.bodyParts.add(arrayOf(Snake.headX, Snake.headY))
 
                     if (Snake.headX == Food.posX && Snake.headY == Food.posY)
-                        Food.generate()
+                        Food.generate(this@MainActivity) // Passing context to Food.generate
                     else
                         Snake.bodyParts.removeAt(0)
 
